@@ -4,12 +4,11 @@
 ###############################################################
 
 import pandas as pd
-import pymongo, datetime, uuid
+import dml, datetime, uuid
 import prov.model
 import random
+import json
 from scic_stat_tests import *
-exec(open('../pymongo_dm.py').read())
-
 ##############################################################
 ####   random sampler
 #stackoverflow.com/questions/6482889/get-random-sample-from-list-while-maintaining-ordering-of-items
@@ -27,7 +26,7 @@ def orderedSampleWithoutReplacement(seq, k):
 ###############################################################
 ####    access the data       
 ###############################################################
-client = pymongo.MongoClient()
+client = dml.pymongo.MongoClient()
 repo = client.repo
 repo.authenticate('balawson', 'balawson')
 
@@ -37,9 +36,14 @@ gowalla    = pd.DataFrame(list(repo.balawson.gowalla.find()))
 brightkite = pd.DataFrame(list(repo.balawson.brightkite.find()))
 
 ####create random samples of each dataset (because they are too big)
-b_test =  brightkite.iloc[list(orderedSampleWithoutReplacement([x for x in range(0,len(brightkite.lat))], 5000))]
-g_test =  gowalla.iloc[list(orderedSampleWithoutReplacement([x for x in range(0,len(gowalla.lat))], 5000))]
-t_test =  tweets.iloc[list(orderedSampleWithoutReplacement([x for x in range(0,len(tweets.lat))], 5000))]
+if dml.options.trial:
+    b_test =  brightkite.iloc[list(orderedSampleWithoutReplacement([x for x in range(0,5)], 5))]
+    g_test =  gowalla.iloc[list(orderedSampleWithoutReplacement([x for x in range(0,5)], 5))]
+    t_test =  tweets.iloc[list(orderedSampleWithoutReplacement([x for x in range(0,5)], 5))]
+else:    
+    b_test =  brightkite.iloc[list(orderedSampleWithoutReplacement([x for x in range(0,len(brightkite.lat))], 5000))]
+    g_test =  gowalla.iloc[list(orderedSampleWithoutReplacement([x for x in range(0,len(gowalla.lat))], 5000))]
+    t_test =  tweets.iloc[list(orderedSampleWithoutReplacement([x for x in range(0,len(tweets.lat))], 5000))]
 
 ###############################################################
 ####    analyze the data       
@@ -53,7 +57,6 @@ print('\tbetween Brightkite and Twitter: ',)
 b_t_results = (ks2d2s(list(b_test.lat), list(b_test.lng), list(t_test.lat), list(t_test.lng)))
 print('\tbetween Gowalla and Brightkite: ',)
 g_b_results = (ks2d2s(list(g_test.lat), list(g_test.lng), list(b_test.lat), list(b_test.lng)))
-
 
 '''
 TODO: put the correct time collumn in (this compares between milisecond differences not hour/min differences
@@ -69,7 +72,6 @@ print(ks2d2s(list(g_test.time), list(t_test.time)))
 ###############################################################
 ####    save results       
 ###############################################################
-
 records = {'gowalla_twitter' : g_t_results,
            'brightkite_twitter' : b_t_results,
            'gowalla_brightkite': g_b_results,
@@ -126,7 +128,7 @@ doc.wasDerivedFrom(twitter_ent, twitter_resource)
 
 repo.record(doc.serialize()) # Record the provenance document.
 #print(json.dumps(json.loads(doc.serialize()), indent=4))
-open('plan.json','w').write(json.dumps(json.loads(doc.serialize()), indent=4))
+open('plan.json','a').write(json.dumps(json.loads(doc.serialize()), indent=4))
 print(doc.get_provn())
 repo.logout()
 

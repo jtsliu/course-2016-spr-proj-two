@@ -3,16 +3,16 @@
 ####   import dependancies       
 ###############################################################
 import pandas as pd
-import pymongo, datetime, uuid, math
+import dml, datetime, uuid, math
 import prov.model
+import json
 from sklearn import cluster
 from sklearn.preprocessing import StandardScaler
 import numpy as np
-exec(open('../pymongo_dm.py').read())
 ###############################################################
 ####    access the data       
 ###############################################################
-client = pymongo.MongoClient()
+client = dml.pymongo.MongoClient()
 repo = client.repo
 repo.authenticate('balawson', 'balawson')
 
@@ -51,21 +51,18 @@ for i in range(n_clusters):
 ####    save results       
 ###############################################################
 
-records = {'labels'  : data_labels,\
-     'centers' : data_cluster_centers,\
-     'size'    :  data_num_each_cluster,\
-     'date_created' : datetime.datetime.today(),
-     'k'        : k
+records = {'labels'  : data_labels.tolist(),\
+     'centers' : data_cluster_centers.tolist(),\
+     'size'    :  data_num_each_cluster.tolist(),\
+     'date_created' : datetime.datetime.today(),\
+     'k'        : k,\
           }
-  
+
 collection_name = 'kmeans_results'
 # doing this because kmeans is random and we may want different results
-if not(db[collection_name]):
-    repo.createPermanent(collection_name)
-#repo.dropPermanent(collection_name)
-
+repo.dropPermanent(collection_name)
+repo.createPermanent(collection_name)
 repo['balawson.' + collection_name].insert(records)
-
 endTime  = datetime.datetime.now()
 
 ###############################################################
@@ -110,7 +107,7 @@ doc.wasDerivedFrom(twitter_ent, twitter_resource)
 
 repo.record(doc.serialize()) # Record the provenance document.
 #print(json.dumps(json.loads(doc.serialize()), indent=4))
-open('plan.json','w').write(json.dumps(json.loads(doc.serialize()), indent=4))
+open('plan.json','a').write(json.dumps(json.loads(doc.serialize()), indent=4))
 print(doc.get_provn())
 repo.logout()
 

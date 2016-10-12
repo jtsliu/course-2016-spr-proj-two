@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<title>Food Establishment Influence on Parking Violations</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href='https://fonts.googleapis.com/css?family=Karla' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+	<h1>Food Establishment Influence on Parking Violations</h1>
+	<script src="http://d3js.org/d3.v3.js"></script>
+	<div id="chart"></div>
+	<div id="dataset-picker">
+	</div>
+	<script type="text/javascript">
+		var w = 700;
+		var h = 500;
+		var padding = 60;
+		var label = d3.select("body").append("div")
+		    .attr("class", "label")
+		    .style("opacity", 0);
+		
+		var current = 2;
+
+		//Static dataset
+		var dataset_tickets = [['02134', 47, 33, 25, 120], ['02115', 54, 26, 29, 378], ['02118', 28, 38, 7, 177], ['02116', 100, 56, 87, 453], ['02135', 40, 59, 3, 53], ['02215', 43, 20, 37, 421], ['02120', 10, 6, 2, 15], ['02114', 48, 8, 73, 43], ['02210', 38, 7, 1, 2], ['02108', 41, 5, 14, 24], ['02467', 1, 1, 1, 10]]
+
+		var dataset_towed = [[52, 72], [48, 73], [16, 8], [100, 87], [41, 20], [47, 25], [47, 69], [43, 37], [54, 29], [41, 14], [65, 55], [28, 2], [58, 6], [33, 35], [1, 1], [20, 17], [9, 3], [10, 2], [28, 7], [40, 3], [26, 2], [14, 2], [38, 1], [27, 1]]
+
+		var datasets = [dataset_tickets, dataset_towed];
+		var dataset_labels = ["Tickets", "Towed"];
+
+		var scatterPlot = function(cur_data, i) {
+			console.log(current);
+			if (i == null) {
+				i = 0;
+			}
+			//Create scale functions
+			var xScale = d3.scale.linear()
+								 .domain([0, d3.max(cur_data, function(d) { return d[1]; })])
+								 .range([padding, w - padding]);
+
+			var yScale = d3.scale.linear()
+								 .domain([0, d3.max(cur_data, function(d) { return d[current]; })])
+								 .range([h - padding, padding]);
+
+			var rScale = d3.scale.linear()
+								 .domain([0, d3.max(cur_data, function(d) { return d[4]; })])
+								 .range([4, 15]);
+
+			//Define X axis
+			var xAxis = d3.svg.axis()
+							  .scale(xScale)
+							  .orient("bottom")
+							  .ticks(6);
+
+			//Define Y axis
+			var yAxis = d3.svg.axis()
+							  .scale(yScale)
+							  .orient("left")
+							  .ticks(6);
+
+			//Create SVG element
+			var dots = d3.select("body")
+						.append("svg")
+						.attr("width", w)
+						.attr("height", h)
+						.style("padding", "20px")
+						.style("background-color", "#ffffff");
+
+			//Create circles
+			dots.selectAll("circle")
+				.remove();
+
+			dots.selectAll("circle")
+				.data(cur_data)
+				.enter()
+				.append("circle")
+				.attr("cx", function(d) {
+					return xScale(d[1]);
+				})
+				.attr("cy", function(d) {
+					return yScale(d[current]);
+				})
+				.attr("r", function(d) {
+					return rScale(d[4]);
+					//return rScale(d[1]);
+				})
+				.on("mouseover", function(d) {
+					label.transition()
+	               .duration(200)
+	               .style("opacity", .9);
+
+					label.html("(" + d[1] + ", " + d[current] + ")")
+					.style("left", (xScale(d[1]) + padding*4.1) + "px")
+					.style("top", (yScale(d[current]) + padding*4.1) + "px");
+					})
+				.on("mouseout", function(d) {
+					label.transition()
+					.duration(500)
+					.style("opacity", 0);
+				});
+
+			//Create labels
+			// var labels = svg.selectAll("text")
+			// 	.data(dataset)
+			// 	.enter()
+			// 	.append("text")
+			// 	.text(function(d) {
+			// 		return d[0] + "," + d[1];
+			// 	})
+			// 	.attr("x", function(d) {
+			// 		return xScale(d[0]);
+			// 	})
+			// 	.attr("y", function(d) {
+			// 		return yScale(d[1]);
+			// 	})
+			// 	.attr("font-family", "sans-serif")
+			// 	.attr("font-size", "11px")
+			// 	.attr("fill", "red");
+			
+			//Create X axis
+			dots.append("g")
+				.attr("class", "axis")
+				.attr("transform", "translate(0," + (h - padding) + ")")
+				.call(xAxis)
+				.append("text")
+				.attr("class", "label")
+				.attr("y", 40)
+				.attr("x", w/2)
+		      	.style("text-anchor", "middle")
+				.text("# of Food Establishments");
+			
+			//Create Y axis
+			dots.append("g")
+				.attr("class", "axis")
+				.attr("transform", "translate(" + padding + ",0)")
+				.call(yAxis)
+				.append("text")
+				.attr("class", "label")
+				.attr("y", -50)
+		      	.style("text-anchor", "middle")
+				.text("# of " + dataset_labels[i])
+				.attr("transform", "rotate(-90) translate(" + (-1*w/2.5) + ",0)");
+		};
+
+	scatterPlot(datasets[0]);
+
+	  var datasetpicker = d3.select("#dataset-picker").selectAll(".dataset-button")
+        .data(datasets);
+
+      datasetpicker.enter()
+        .append("input")
+        .attr("value", function(d, i){ return dataset_labels[i] })
+        .attr("type", "button")
+        .attr("class", function(d, i) { return "dataset-button " + dataset_labels[i].toLowerCase() })
+        .on("click", function(d, i) {
+          d3.select("body").selectAll("svg").remove();
+          current = 2 + i;
+          scatterPlot(dataset_tickets, i);
+        });
+	</script>
+  </body>
+</html>
+
+		

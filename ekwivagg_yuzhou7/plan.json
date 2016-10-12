@@ -1,110 +1,837 @@
 {
+    "prefix": {
+        "log": "http://datamechanics.io/log#",
+        "dat": "http://datamechanics.io/data/ekwivagg_yuzhou7/",
+        "bdp": "https://data.cityofboston.gov/resource/",
+        "alg": "http://datamechanics.io/algorithm/ekwivagg_yuzhou7/",
+        "ont": "http://datamechanics.io/ontology#"
+    },
+    "entity": {
+        "bdp:gb6y-34cq": {
+            "prov:type": "ont:DataResource",
+            "prov:label": "Active Food Establishment Licenses",
+            "ont:Extension": "json"
+        },
+        "bdp:ciur-a7cc": {
+            "prov:type": "ont:DataResource",
+            "prov:label": "Mayors 24 Hour Hotline",
+            "ont:Extension": "json"
+        },
+        "dat:inspection": {
+            "prov:type": "ont:DataSet",
+            "prov:label": "Restaurant Inspection"
+        },
+        "dat:restaurant": {
+            "prov:type": "ont:DataSet",
+            "prov:label": "Restaurant"
+        },
+        "bdp:qndu-wx8w": {
+            "prov:type": "ont:DataResource",
+            "prov:label": "Food Establishment Inspections",
+            "ont:Extension": "json"
+        },
+        "dat:hotline": {
+            "prov:type": "ont:DataSet",
+            "prov:label": "Rodent Activity"
+        }
+    },
+    "agent": {
+        "alg:Retrieval": {
+            "prov:type": {
+                "type": "prov:QUALIFIED_NAME",
+                "$": "prov:SoftwareAgent"
+            },
+            "ont:Extension": "py"
+        }
+    },
+    "wasAttributedTo": {
+        "_:id3": {
+            "prov:entity": "dat:restaurant",
+            "prov:agent": "alg:Retrieval"
+        },
+        "_:id13": {
+            "prov:entity": "dat:inspection",
+            "prov:agent": "alg:Retrieval"
+        },
+        "_:id8": {
+            "prov:entity": "dat:hotline",
+            "prov:agent": "alg:Retrieval"
+        }
+    },
+    "wasAssociatedWith": {
+        "_:id1": {
+            "prov:activity": "log:a71edec08-d486-49fb-9090-17130ebb7235",
+            "prov:agent": "alg:Retrieval"
+        },
+        "_:id6": {
+            "prov:activity": "log:a19352ace-b1d7-4f40-a67a-547f369c4f0c",
+            "prov:agent": "alg:Retrieval"
+        },
+        "_:id11": {
+            "prov:activity": "log:a8b7d27dc-cd4f-4c2e-bcb7-52b6911d5a56",
+            "prov:agent": "alg:Retrieval"
+        }
+    },
+    "wasDerivedFrom": {
+        "_:id10": {
+            "prov:usage": "log:a19352ace-b1d7-4f40-a67a-547f369c4f0c",
+            "prov:usedEntity": "bdp:ciur-a7cc",
+            "prov:generation": "log:a19352ace-b1d7-4f40-a67a-547f369c4f0c",
+            "prov:activity": "log:a19352ace-b1d7-4f40-a67a-547f369c4f0c",
+            "prov:generatedEntity": "dat:hotline"
+        },
+        "_:id5": {
+            "prov:usage": "log:a71edec08-d486-49fb-9090-17130ebb7235",
+            "prov:usedEntity": "bdp:gb6y-34cq",
+            "prov:generation": "log:a71edec08-d486-49fb-9090-17130ebb7235",
+            "prov:activity": "log:a71edec08-d486-49fb-9090-17130ebb7235",
+            "prov:generatedEntity": "dat:restaurant"
+        },
+        "_:id15": {
+            "prov:usage": "log:a8b7d27dc-cd4f-4c2e-bcb7-52b6911d5a56",
+            "prov:usedEntity": "bdp:qndu-wx8w",
+            "prov:generation": "log:a8b7d27dc-cd4f-4c2e-bcb7-52b6911d5a56",
+            "prov:activity": "log:a8b7d27dc-cd4f-4c2e-bcb7-52b6911d5a56",
+            "prov:generatedEntity": "dat:inspection"
+        }
+    },
+    "wasGeneratedBy": {
+        "_:id4": {
+            "prov:time": "2016-06-25T20:41:40.705224",
+            "prov:entity": "dat:restaurant",
+            "prov:activity": "log:a71edec08-d486-49fb-9090-17130ebb7235"
+        },
+        "_:id9": {
+            "prov:time": "2016-06-25T20:41:40.705224",
+            "prov:entity": "dat:hotline",
+            "prov:activity": "log:a19352ace-b1d7-4f40-a67a-547f369c4f0c"
+        },
+        "_:id14": {
+            "prov:time": "2016-06-25T20:41:40.705224",
+            "prov:entity": "dat:inspection",
+            "prov:activity": "log:a8b7d27dc-cd4f-4c2e-bcb7-52b6911d5a56"
+        }
+    },
+    "activity": {
+        "log:a71edec08-d486-49fb-9090-17130ebb7235": {
+            "prov:startTime": "2016-06-25T20:41:28.041737",
+            "prov:type": "ont:Retrieval",
+            "prov:endTime": "2016-06-25T20:41:40.705224",
+            "ont:Query": "?$select=businessname,location"
+        },
+        "log:a19352ace-b1d7-4f40-a67a-547f369c4f0c": {
+            "prov:startTime": "2016-06-25T20:41:28.041737",
+            "prov:type": "ont:Retrieval",
+            "prov:endTime": "2016-06-25T20:41:40.705224",
+            "ont:Query": "?type=Rodent+Activity&$select=geocoded_location"
+        },
+        "log:a8b7d27dc-cd4f-4c2e-bcb7-52b6911d5a56": {
+            "prov:startTime": "2016-06-25T20:41:28.041737",
+            "prov:type": "ont:Retrieval",
+            "prov:endTime": "2016-06-25T20:41:40.705224",
+            "ont:Query": "?$select=businessname,result,resultdttm,violdesc,violdttm,violstatus"
+        }
+    },
+    "used": {
+        "_:id12": {
+            "prov:time": "2016-06-25T20:41:28.041737",
+            "prov:activity": "log:a8b7d27dc-cd4f-4c2e-bcb7-52b6911d5a56",
+            "prov:entity": "bdp:qndu-wx8w"
+        },
+        "_:id2": {
+            "prov:time": "2016-06-25T20:41:28.041737",
+            "prov:activity": "log:a71edec08-d486-49fb-9090-17130ebb7235",
+            "prov:entity": "bdp:gb6y-34cq"
+        },
+        "_:id7": {
+            "prov:time": "2016-06-25T20:41:28.041737",
+            "prov:activity": "log:a19352ace-b1d7-4f40-a67a-547f369c4f0c",
+            "prov:entity": "bdp:ciur-a7cc"
+        }
+    }
+},
+{
+    "used": {
+        "_:id2": {
+            "prov:time": "2016-06-25T20:44:51.751558",
+            "prov:activity": "log:a7364cee7-2bbf-486a-9004-9a472bca2905",
+            "prov:entity": "dat:restaurant"
+        },
+        "_:id6": {
+            "prov:time": "2016-06-25T20:44:51.751558",
+            "prov:activity": "log:ac8561758-32e9-4f64-b496-f2e5ec666108",
+            "prov:entity": "dat:restaurant"
+        },
+        "_:id7": {
+            "prov:time": "2016-06-25T20:44:51.751558",
+            "prov:activity": "log:ac8561758-32e9-4f64-b496-f2e5ec666108",
+            "prov:entity": "dat:hotline"
+        },
+        "_:id4": {
+            "prov:time": "2016-06-25T20:44:51.751558",
+            "prov:activity": "log:a931b2f60-d402-480c-bb19-6dabc2d05097",
+            "prov:entity": "dat:hotline"
+        }
+    },
+    "wasAssociatedWith": {
+        "_:id1": {
+            "prov:agent": "alg:rodent_problem",
+            "prov:activity": "log:a7364cee7-2bbf-486a-9004-9a472bca2905"
+        },
+        "_:id3": {
+            "prov:agent": "alg:rodent_problem",
+            "prov:activity": "log:a931b2f60-d402-480c-bb19-6dabc2d05097"
+        },
+        "_:id5": {
+            "prov:agent": "alg:rodent_problem",
+            "prov:activity": "log:ac8561758-32e9-4f64-b496-f2e5ec666108"
+        }
+    },
+    "activity": {
+        "log:ac8561758-32e9-4f64-b496-f2e5ec666108": {
+            "prov:endTime": "2016-06-25T20:44:52.398947",
+            "prov:type": "ont:Computation",
+            "prov:startTime": "2016-06-25T20:44:51.751558"
+        },
+        "log:a7364cee7-2bbf-486a-9004-9a472bca2905": {
+            "prov:endTime": "2016-06-25T20:44:52.398947",
+            "prov:type": "ont:Retrieval",
+            "prov:startTime": "2016-06-25T20:44:51.751558"
+        },
+        "log:a931b2f60-d402-480c-bb19-6dabc2d05097": {
+            "prov:endTime": "2016-06-25T20:44:52.398947",
+            "prov:type": "ont:Retrieval",
+            "prov:startTime": "2016-06-25T20:44:51.751558"
+        }
+    },
+    "wasAttributedTo": {
+        "_:id8": {
+            "prov:agent": "alg:rodent_problem",
+            "prov:entity": "dat:rodent_problem"
+        }
+    },
+    "wasGeneratedBy": {
+        "_:id9": {
+            "prov:time": "2016-06-25T20:44:52.398947",
+            "prov:activity": "log:ac8561758-32e9-4f64-b496-f2e5ec666108",
+            "prov:entity": "dat:rodent_problem"
+        }
+    },
+    "prefix": {
+        "ont": "http://datamechanics.io/ontology#",
+        "bdp": "https://data.cityofboston.gov/resource/",
+        "alg": "http://datamechanics.io/algorithm/ekwivagg_yuzhou7/",
+        "dat": "http://datamechanics.io/data/ekwivagg_yuzhou7/",
+        "log": "http://datamechanics.io/log#"
+    },
+    "agent": {
+        "alg:rodent_problem": {
+            "prov:type": {
+                "$": "prov:SoftwareAgent",
+                "type": "prov:QUALIFIED_NAME"
+            },
+            "ont:Extension": "py"
+        }
+    },
+    "wasDerivedFrom": {
+        "_:id10": {
+            "prov:generatedEntity": "dat:rodent_problem",
+            "prov:activity": "log:ac8561758-32e9-4f64-b496-f2e5ec666108",
+            "prov:usage": "log:ac8561758-32e9-4f64-b496-f2e5ec666108",
+            "prov:usedEntity": "dat:restaurant",
+            "prov:generation": "log:ac8561758-32e9-4f64-b496-f2e5ec666108"
+        }
+    },
+    "entity": {
+        "dat:restaurant": {
+            "prov:type": "ont:DataSet",
+            "ont:Extension": "json",
+            "prov:label": "Restaurants"
+        },
+        "dat:rodent_problem": {
+            "prov:type": "ont:DataSet",
+            "ont:Extension": "json",
+            "prov:label": "Rodent Problem"
+        },
+        "dat:hotline": {
+            "prov:type": "ont:DataSet",
+            "ont:Extension": "json",
+            "prov:label": "Rodent"
+        }
+    }
+},
+{
+    "activity": {
+        "log:a47f4637d-9fb2-4151-af9f-f0e2f6e960e4": {
+            "prov:startTime": "2016-06-25T21:06:32.934813",
+            "prov:type": "ont:Retrieval",
+            "prov:endTime": "2016-06-25T21:06:33.748234"
+        },
+        "log:afcf99f99-387d-4273-8462-c3c118c5478c": {
+            "prov:startTime": "2016-06-25T21:06:32.934813",
+            "prov:type": "ont:Computation",
+            "prov:endTime": "2016-06-25T21:06:33.748234"
+        },
+        "log:a5c37e895-c320-459e-9f98-12443af8267a": {
+            "prov:startTime": "2016-06-25T21:06:32.934813",
+            "prov:type": "ont:Retrieval",
+            "prov:endTime": "2016-06-25T21:06:33.748234"
+        }
+    },
+    "wasGeneratedBy": {
+        "_:id9": {
+            "prov:entity": "dat:inspection",
+            "prov:time": "2016-06-25T21:06:33.748234",
+            "prov:activity": "log:afcf99f99-387d-4273-8462-c3c118c5478c"
+        }
+    },
+    "wasDerivedFrom": {
+        "_:id10": {
+            "prov:usedEntity": "dat:restaurant",
+            "prov:usage": "log:afcf99f99-387d-4273-8462-c3c118c5478c",
+            "prov:generation": "log:afcf99f99-387d-4273-8462-c3c118c5478c",
+            "prov:generatedEntity": "dat:inspection",
+            "prov:activity": "log:afcf99f99-387d-4273-8462-c3c118c5478c"
+        }
+    },
+    "prefix": {
+        "ont": "http://datamechanics.io/ontology#",
+        "alg": "http://datamechanics.io/algorithm/ekwivagg_yuzhou7/",
+        "bdp": "https://data.cityofboston.gov/resource/",
+        "log": "http://datamechanics.io/log#",
+        "dat": "http://datamechanics.io/data/ekwivagg_yuzhou7/"
+    },
+    "entity": {
+        "dat:hotline": {
+            "prov:type": "ont:DataSet",
+            "ont:Extension": "json",
+            "prov:label": "inspection"
+        },
+        "dat:restaurant": {
+            "prov:type": "ont:DataSet",
+            "ont:Extension": "json",
+            "prov:label": "Restaurants"
+        },
+        "dat:inspection": {
+            "prov:type": "ont:DataSet",
+            "ont:Extension": "json",
+            "prov:label": "inspection"
+        }
+    },
+    "used": {
+        "_:id2": {
+            "prov:entity": "dat:restaurant",
+            "prov:time": "2016-06-25T21:06:32.934813",
+            "prov:activity": "log:a47f4637d-9fb2-4151-af9f-f0e2f6e960e4"
+        },
+        "_:id7": {
+            "prov:entity": "dat:hotline",
+            "prov:time": "2016-06-25T21:06:32.934813",
+            "prov:activity": "log:afcf99f99-387d-4273-8462-c3c118c5478c"
+        },
+        "_:id6": {
+            "prov:entity": "dat:restaurant",
+            "prov:time": "2016-06-25T21:06:32.934813",
+            "prov:activity": "log:afcf99f99-387d-4273-8462-c3c118c5478c"
+        },
+        "_:id4": {
+            "prov:entity": "dat:hotline",
+            "prov:time": "2016-06-25T21:06:32.934813",
+            "prov:activity": "log:a5c37e895-c320-459e-9f98-12443af8267a"
+        }
+    },
+    "wasAttributedTo": {
+        "_:id8": {
+            "prov:entity": "dat:inspection",
+            "prov:agent": "alg:inspection"
+        }
+    },
     "agent": {
         "alg:inspection": {
             "prov:type": {
-                "type": "prov:QUALIFIED_NAME", 
-                "$": "prov:SoftwareAgent"
-            }, 
+                "$": "prov:SoftwareAgent",
+                "type": "prov:QUALIFIED_NAME"
+            },
             "ont:Extension": "py"
         }
-    }, 
+    },
+    "wasAssociatedWith": {
+        "_:id3": {
+            "prov:agent": "alg:inspection",
+            "prov:activity": "log:a5c37e895-c320-459e-9f98-12443af8267a"
+        },
+        "_:id1": {
+            "prov:agent": "alg:inspection",
+            "prov:activity": "log:a47f4637d-9fb2-4151-af9f-f0e2f6e960e4"
+        },
+        "_:id5": {
+            "prov:agent": "alg:inspection",
+            "prov:activity": "log:afcf99f99-387d-4273-8462-c3c118c5478c"
+        }
+    }
+},
+{
+    "agent": {
+        "alg: get_crime": {
+            "ont:Extension": "py",
+            "prov:type": {
+                "type": "prov:QUALIFIED_NAME",
+                "$": "prov:SoftwareAgent"
+            }
+        }
+    },
+    "prefix": {
+        "bdp": "https://data.cityofboston.gov/resource/",
+        "log": "http://datamechanics.io/log#",
+        "alg": "http://datamechanics.io/algorithm/ekwivagg_yuzhou7/",
+        "dat": "http://datamechanics.io/data/ekwivagg_yuzhou7/",
+        "ont": "http://datamechanics.io/ontology#",
+        "sj": "http://cs-people.bu.edu/sajarvis/datamech/mbta_gtfs/"
+    },
+    "wasAssociatedWith": {
+        "_:id8": {
+            "prov:activity": "log:a00c103e0-fdd5-4e03-b601-227e355e08b3",
+            "prov:agent": "alg: get_crime"
+        },
+        "_:id3": {
+            "prov:activity": "log:ac486565d-3dac-490e-9a3d-12824288e8ee",
+            "prov:agent": "alg: get_crime"
+        },
+        "_:id1": {
+            "prov:activity": "log:ad1810065-0822-492c-9e57-7859a288540d",
+            "prov:agent": "alg: get_crime"
+        },
+        "_:id5": {
+            "prov:activity": "log:a5ef17278-4ba1-4997-8a86-c93b4719a57e",
+            "prov:agent": "alg: get_crime"
+        }
+    },
+    "wasAttributedTo": {
+        "_:id10": {
+            "prov:agent": "alg: get_crime",
+            "prov:entity": "dat:closest_stop_larceny"
+        }
+    },
+    "activity": {
+        "log:ac486565d-3dac-490e-9a3d-12824288e8ee": {
+            "prov:endTime": "2016-06-25T21:08:01.143766",
+            "ont:Query": "?incident_type_description=larceny+from+motor+vehicle&$select=location,compnos&$limit=50000",
+            "prov:type": "ont:Retrieval",
+            "prov:startTime": "2016-06-25T21:07:32.602483"
+        },
+        "log:a5ef17278-4ba1-4997-8a86-c93b4719a57e": {
+            "prov:endTime": "2016-06-25T21:08:01.143766",
+            "prov:type": "ont:Computation",
+            "prov:startTime": "2016-06-25T21:07:32.602483"
+        },
+        "log:a00c103e0-fdd5-4e03-b601-227e355e08b3": {
+            "prov:endTime": "2016-06-25T21:08:01.143766",
+            "prov:type": "ont:Computation",
+            "prov:startTime": "2016-06-25T21:07:32.602483"
+        },
+        "log:ad1810065-0822-492c-9e57-7859a288540d": {
+            "prov:endTime": "2016-06-25T21:08:01.143766",
+            "prov:type": "ont:Retrieval",
+            "prov:startTime": "2016-06-25T21:07:32.602483"
+        }
+    },
+    "entity": {
+        "dat:closest_stop_larceny": {
+            "prov:label": "Closest Larceny Stop",
+            "ont:Extension": "json",
+            "prov:type": "ont:DataSet"
+        },
+        "sj:stops": {
+            "prov:label": "T Stops",
+            "ont:Extension": "txt",
+            "prov:type": "ont:DataSet"
+        },
+        "dat:crime_freq": {
+            "prov:label": "Crime Frequency",
+            "ont:Extension": "json",
+            "prov:type": "ont:DataSet"
+        },
+        "bdp:7cdf-6fgx": {
+            "prov:label": "Larcenies",
+            "ont:Extension": "json",
+            "prov:type": "ont:DataResource"
+        }
+    },
+    "used": {
+        "_:id4": {
+            "prov:activity": "log:ac486565d-3dac-490e-9a3d-12824288e8ee",
+            "prov:time": "2016-06-25T21:07:32.602483",
+            "prov:entity": "bdp:7cdf-6fgx"
+        },
+        "_:id9": {
+            "prov:activity": "dat:crime_freq",
+            "prov:time": "2016-06-25T21:07:32.602483",
+            "prov:entity": "dat:closest_stop_larceny"
+        },
+        "_:id2": {
+            "prov:activity": "log:ad1810065-0822-492c-9e57-7859a288540d",
+            "prov:time": "2016-06-25T21:07:32.602483",
+            "prov:entity": "sj:stops"
+        },
+        "_:id6": {
+            "prov:activity": "log:a5ef17278-4ba1-4997-8a86-c93b4719a57e",
+            "prov:time": "2016-06-25T21:07:32.602483",
+            "prov:entity": "bdp:7cdf-6fgx"
+        },
+        "_:id7": {
+            "prov:activity": "log:a5ef17278-4ba1-4997-8a86-c93b4719a57e",
+            "prov:time": "2016-06-25T21:07:32.602483",
+            "prov:entity": "sj:stops"
+        }
+    },
+    "wasDerivedFrom": {
+        "_:id13": {
+            "prov:generation": "log:a5ef17278-4ba1-4997-8a86-c93b4719a57e",
+            "prov:activity": "log:a5ef17278-4ba1-4997-8a86-c93b4719a57e",
+            "prov:generatedEntity": "dat:closest_stop_larceny",
+            "prov:usedEntity": "sj:stops",
+            "prov:usage": "log:a5ef17278-4ba1-4997-8a86-c93b4719a57e"
+        },
+        "_:id12": {
+            "prov:generation": "log:a5ef17278-4ba1-4997-8a86-c93b4719a57e",
+            "prov:activity": "log:a5ef17278-4ba1-4997-8a86-c93b4719a57e",
+            "prov:generatedEntity": "dat:closest_stop_larceny",
+            "prov:usedEntity": "bdp:7cdf-6fgx",
+            "prov:usage": "log:a5ef17278-4ba1-4997-8a86-c93b4719a57e"
+        },
+        "_:id14": {
+            "prov:generation": "log:a00c103e0-fdd5-4e03-b601-227e355e08b3",
+            "prov:activity": "log:a00c103e0-fdd5-4e03-b601-227e355e08b3",
+            "prov:generatedEntity": "dat:closest_stop_larceny",
+            "prov:usedEntity": "dat:crime_freq",
+            "prov:usage": "log:a00c103e0-fdd5-4e03-b601-227e355e08b3"
+        }
+    },
+    "wasGeneratedBy": {
+        "_:id11": {
+            "prov:activity": "log:a5ef17278-4ba1-4997-8a86-c93b4719a57e",
+            "prov:time": "2016-06-25T21:08:01.143766",
+            "prov:entity": "dat:closest_stop_larceny"
+        }
+    }
+},
+{
     "wasGeneratedBy": {
         "_:id9": {
-            "prov:time": "2016-03-01T21:15:04.559576", 
-            "prov:activity": "log:ab8f504d6-22a9-4147-94b2-92c628197949", 
-            "prov:entity": "dat:inspection"
+            "prov:time": "2016-06-25T21:10:15.570616",
+            "prov:activity": "log:a181372ce-992e-4dac-9431-256f4ebd10ce",
+            "prov:entity": "dat:closest_stop"
         }
-    }, 
-    "activity": {
-        "log:ab8f504d6-22a9-4147-94b2-92c628197949": {
-            "prov:type": "ont:Computation", 
-            "prov:startTime": "2016-03-01T21:15:03.872536", 
-            "prov:endTime": "2016-03-01T21:15:04.559576"
-        }, 
-        "log:a186725f8-9a2a-425f-bf43-e9e411907b2e": {
-            "prov:type": "ont:Retrieval", 
-            "prov:startTime": "2016-03-01T21:15:03.872536", 
-            "prov:endTime": "2016-03-01T21:15:04.559576"
-        }, 
-        "log:a4d653fcd-71fa-4a5d-80aa-1c279666fa6f": {
-            "prov:type": "ont:Retrieval", 
-            "prov:startTime": "2016-03-01T21:15:03.872536", 
-            "prov:endTime": "2016-03-01T21:15:04.559576"
-        }
-    }, 
-    "entity": {
-        "dat:hotline": {
-            "prov:type": "ont:DataSet", 
-            "ont:Extension": "json", 
-            "prov:label": "inspection"
-        }, 
-        "dat:restaurant": {
-            "prov:type": "ont:DataSet", 
-            "ont:Extension": "json", 
-            "prov:label": "Restaurants"
-        }, 
-        "dat:inspection": {
-            "prov:type": "ont:DataSet", 
-            "ont:Extension": "json", 
-            "prov:label": "inspection"
-        }
-    }, 
-    "wasAssociatedWith": {
-        "_:id1": {
-            "prov:agent": "alg:inspection", 
-            "prov:activity": "log:a4d653fcd-71fa-4a5d-80aa-1c279666fa6f"
-        }, 
-        "_:id3": {
-            "prov:agent": "alg:inspection", 
-            "prov:activity": "log:a186725f8-9a2a-425f-bf43-e9e411907b2e"
-        }, 
-        "_:id5": {
-            "prov:agent": "alg:inspection", 
-            "prov:activity": "log:ab8f504d6-22a9-4147-94b2-92c628197949"
-        }
-    }, 
+    },
     "wasAttributedTo": {
         "_:id8": {
-            "prov:agent": "alg:inspection", 
-            "prov:entity": "dat:inspection"
+            "prov:agent": "alg:closest_stop",
+            "prov:entity": "dat:closest_stop"
         }
-    }, 
-    "wasDerivedFrom": {
-        "_:id10": {
-            "prov:usage": "log:ab8f504d6-22a9-4147-94b2-92c628197949", 
-            "prov:usedEntity": "dat:restaurant", 
-            "prov:activity": "log:ab8f504d6-22a9-4147-94b2-92c628197949", 
-            "prov:generation": "log:ab8f504d6-22a9-4147-94b2-92c628197949", 
-            "prov:generatedEntity": "dat:inspection"
+    },
+    "activity": {
+        "log:a97e155be-c63d-4a48-8b2c-a87c17369b69": {
+            "prov:startTime": "2016-06-25T21:10:13.945448",
+            "prov:type": "ont:Retrieval",
+            "prov:endTime": "2016-06-25T21:10:15.570616"
+        },
+        "log:a181372ce-992e-4dac-9431-256f4ebd10ce": {
+            "prov:startTime": "2016-06-25T21:10:13.945448",
+            "prov:type": "ont:Computation",
+            "prov:endTime": "2016-06-25T21:10:15.570616"
+        },
+        "log:ae301d060-4d15-4fa6-8ada-7409749b0c7a": {
+            "prov:startTime": "2016-06-25T21:10:13.945448",
+            "prov:type": "ont:Computation",
+            "prov:endTime": "2016-06-25T21:10:15.570616"
+        },
+        "log:ae58de534-ef3f-478a-949f-5201db5dd398": {
+            "prov:startTime": "2016-06-25T21:10:13.945448",
+            "prov:type": "ont:Retrieval",
+            "prov:endTime": "2016-06-25T21:10:15.570616"
         }
-    }, 
-    "prefix": {
-        "log": "http://datamechanics.io/log#", 
-        "ont": "http://datamechanics.io/ontology#", 
-        "dat": "http://datamechanics.io/data/ekwivagg_yuzhou7/", 
-        "alg": "http://datamechanics.io/algorithm/ekwivagg_yuzhou7/", 
-        "bdp": "https://data.cityofboston.gov/resource/"
-    }, 
+    },
+    "wasAssociatedWith": {
+        "_:id12": {
+            "prov:agent": "alg:closest_stop",
+            "prov:activity": "log:ae301d060-4d15-4fa6-8ada-7409749b0c7a"
+        },
+        "_:id5": {
+            "prov:agent": "alg:closest_stop",
+            "prov:activity": "log:a181372ce-992e-4dac-9431-256f4ebd10ce"
+        },
+        "_:id1": {
+            "prov:agent": "alg:closest_stop",
+            "prov:activity": "log:ae58de534-ef3f-478a-949f-5201db5dd398"
+        },
+        "_:id3": {
+            "prov:agent": "alg:closest_stop",
+            "prov:activity": "log:a97e155be-c63d-4a48-8b2c-a87c17369b69"
+        }
+    },
+    "entity": {
+        "dat:restaurant_freq": {
+            "prov:type": "ont:DataSet",
+            "prov:label": "Restaurant Frequency",
+            "ont:Extension": "json"
+        },
+        "dat:closest_stop": {
+            "prov:type": "ont:DataSet",
+            "prov:label": "Closest T Stop",
+            "ont:Extension": "json"
+        },
+        "dat:restaurant": {
+            "prov:type": "ont:DataSet",
+            "prov:label": "Restaurants",
+            "ont:Extension": "json"
+        },
+        "sj:stops": {
+            "prov:type": "ont:DataSet",
+            "prov:label": "T Stops",
+            "ont:Extension": "txts"
+        }
+    },
+    "agent": {
+        "alg:closest_stop": {
+            "prov:type": {
+                "type": "prov:QUALIFIED_NAME",
+                "$": "prov:SoftwareAgent"
+            },
+            "ont:Extension": "py"
+        }
+    },
     "used": {
-        "_:id2": {
-            "prov:time": "2016-03-01T21:15:03.872536", 
-            "prov:activity": "log:a4d653fcd-71fa-4a5d-80aa-1c279666fa6f", 
-            "prov:entity": "dat:restaurant"
-        }, 
-        "_:id4": {
-            "prov:time": "2016-03-01T21:15:03.872536", 
-            "prov:activity": "log:a186725f8-9a2a-425f-bf43-e9e411907b2e", 
-            "prov:entity": "dat:hotline"
-        }, 
-        "_:id7": {
-            "prov:time": "2016-03-01T21:15:03.872536", 
-            "prov:activity": "log:ab8f504d6-22a9-4147-94b2-92c628197949", 
-            "prov:entity": "dat:hotline"
-        }, 
         "_:id6": {
-            "prov:time": "2016-03-01T21:15:03.872536", 
-            "prov:activity": "log:ab8f504d6-22a9-4147-94b2-92c628197949", 
+            "prov:time": "2016-06-25T21:10:13.945448",
+            "prov:activity": "log:a181372ce-992e-4dac-9431-256f4ebd10ce",
             "prov:entity": "dat:restaurant"
+        },
+        "_:id4": {
+            "prov:time": "2016-06-25T21:10:13.945448",
+            "prov:activity": "log:a97e155be-c63d-4a48-8b2c-a87c17369b69",
+            "prov:entity": "sj:stops"
+        },
+        "_:id7": {
+            "prov:time": "2016-06-25T21:10:13.945448",
+            "prov:activity": "log:a181372ce-992e-4dac-9431-256f4ebd10ce",
+            "prov:entity": "sj:stops"
+        },
+        "_:id13": {
+            "prov:time": "2016-06-25T21:10:13.945448",
+            "prov:activity": "dat:restaurant_freq",
+            "prov:entity": "dat:closest_stop"
+        },
+        "_:id2": {
+            "prov:time": "2016-06-25T21:10:13.945448",
+            "prov:activity": "log:ae58de534-ef3f-478a-949f-5201db5dd398",
+            "prov:entity": "dat:restaurant"
+        }
+    },
+    "wasDerivedFrom": {
+        "_:id11": {
+            "prov:usage": "log:a181372ce-992e-4dac-9431-256f4ebd10ce",
+            "prov:generation": "log:a181372ce-992e-4dac-9431-256f4ebd10ce",
+            "prov:usedEntity": "sj:stops",
+            "prov:activity": "log:a181372ce-992e-4dac-9431-256f4ebd10ce",
+            "prov:generatedEntity": "dat:closest_stop"
+        },
+        "_:id14": {
+            "prov:usage": "log:ae301d060-4d15-4fa6-8ada-7409749b0c7a",
+            "prov:generation": "log:ae301d060-4d15-4fa6-8ada-7409749b0c7a",
+            "prov:usedEntity": "dat:restaurant_freq",
+            "prov:activity": "log:ae301d060-4d15-4fa6-8ada-7409749b0c7a",
+            "prov:generatedEntity": "dat:closest_stop"
+        },
+        "_:id10": {
+            "prov:usage": "log:a181372ce-992e-4dac-9431-256f4ebd10ce",
+            "prov:generation": "log:a181372ce-992e-4dac-9431-256f4ebd10ce",
+            "prov:usedEntity": "dat:restaurant",
+            "prov:activity": "log:a181372ce-992e-4dac-9431-256f4ebd10ce",
+            "prov:generatedEntity": "dat:closest_stop"
+        }
+    },
+    "prefix": {
+        "bdp": "https://data.cityofboston.gov/resource/",
+        "ont": "http://datamechanics.io/ontology#",
+        "dat": "http://datamechanics.io/data/ekwivagg_yuzhou7/",
+        "alg": "http://datamechanics.io/algorithm/ekwivagg_yuzhou7/",
+        "log": "http://datamechanics.io/log#",
+        "sj": "http://cs-people.bu.edu/sajarvis/datamech/mbta_gtfs/"
+    }
+},
+{
+    "agent": {
+        "alg: get_liquor": {
+            "prov:type": {
+                "$": "prov:SoftwareAgent",
+                "type": "prov:QUALIFIED_NAME"
+            },
+            "ont:Extension": "py"
+        }
+    },
+    "prefix": {
+        "bdp": "https://data.cityofboston.gov/resource/",
+        "ont": "http://datamechanics.io/ontology#",
+        "dat": "http://datamechanics.io/data/ekwivagg_yuzhou7/",
+        "alg": "http://datamechanics.io/algorithm/ekwivagg_yuzhou7/",
+        "sj": "http://cs-people.bu.edu/sajarvis/datamech/mbta_gtfs/",
+        "log": "http://datamechanics.io/log#"
+    },
+    "used": {
+        "_:id10": {
+            "prov:entity": "bdp:hda6-fnsh",
+            "prov:time": "2016-06-25T21:11:15.501909",
+            "prov:activity": "log:a4de3b7fb-8666-4357-8868-668f1ceddc8d"
+        },
+        "_:id2": {
+            "prov:entity": "dat:restaurant",
+            "prov:time": "2016-06-25T21:11:15.501909",
+            "prov:activity": "log:af16dd7b8-e984-428f-a1ca-1a220e4acbeb"
+        },
+        "_:id12": {
+            "prov:entity": "dat:closest_stop_liq",
+            "prov:time": "2016-06-25T21:11:15.501909",
+            "prov:activity": "log:a937ea183-7125-4fd2-a52a-2988475c6645"
+        },
+        "_:id4": {
+            "prov:entity": "sj:stops",
+            "prov:time": "2016-06-25T21:11:15.501909",
+            "prov:activity": "log:ad4220292-309c-4947-aa5d-e7a3b67c7926"
+        },
+        "_:id6": {
+            "prov:entity": "bdp:hda6-fnsh",
+            "prov:time": "2016-06-25T21:11:15.501909",
+            "prov:activity": "log:ad395f3ec-dbc0-420b-9837-7a7b616354b1"
+        },
+        "_:id8": {
+            "prov:entity": "dat:restaurant",
+            "prov:time": "2016-06-25T21:11:15.501909",
+            "prov:activity": "log:a4de3b7fb-8666-4357-8868-668f1ceddc8d"
+        },
+        "_:id9": {
+            "prov:entity": "sj:stops",
+            "prov:time": "2016-06-25T21:11:15.501909",
+            "prov:activity": "log:a4de3b7fb-8666-4357-8868-668f1ceddc8d"
+        }
+    },
+    "entity": {
+        "sj:stops": {
+            "prov:type": "ont:DataSet",
+            "ont:Extension": "txts",
+            "prov:label": "T Stops"
+        },
+        "bdp:hda6-fnsh": {
+            "prov:label": "Liquor",
+            "ont:Extension": "json",
+            "prov:type": "ont:DataSet"
+        },
+        "dat:restaurant": {
+            "prov:label": "Restaurants",
+            "ont:Extension": "json",
+            "prov:type": "ont:DataSet"
+        },
+        "dat:closest_stop_liq": {
+            "prov:label": "Closest Liquor Stop",
+            "ont:Extension": "json",
+            "prov:type": "ont:DataSet"
+        },
+        "dat:liquor_freq": {
+            "prov:label": "Liquor Frequency",
+            "ont:Extension": "json",
+            "prov:type": "ont:DataSet"
+        }
+    },
+    "wasAssociatedWith": {
+        "_:id5": {
+            "prov:agent": "alg: get_liquor",
+            "prov:activity": "log:ad395f3ec-dbc0-420b-9837-7a7b616354b1"
+        },
+        "_:id11": {
+            "prov:agent": "alg: get_liquor",
+            "prov:activity": "log:a937ea183-7125-4fd2-a52a-2988475c6645"
+        },
+        "_:id3": {
+            "prov:agent": "alg: get_liquor",
+            "prov:activity": "log:ad4220292-309c-4947-aa5d-e7a3b67c7926"
+        },
+        "_:id7": {
+            "prov:agent": "alg: get_liquor",
+            "prov:activity": "log:a4de3b7fb-8666-4357-8868-668f1ceddc8d"
+        },
+        "_:id1": {
+            "prov:agent": "alg: get_liquor",
+            "prov:activity": "log:af16dd7b8-e984-428f-a1ca-1a220e4acbeb"
+        }
+    },
+    "wasGeneratedBy": {
+        "_:id14": {
+            "prov:entity": "dat:closest_stop_liq",
+            "prov:time": "2016-06-25T21:11:19.504196",
+            "prov:activity": "log:a4de3b7fb-8666-4357-8868-668f1ceddc8d"
+        }
+    },
+    "activity": {
+        "log:a4de3b7fb-8666-4357-8868-668f1ceddc8d": {
+            "prov:startTime": "2016-06-25T21:11:15.501909",
+            "prov:endTime": "2016-06-25T21:11:19.504196",
+            "prov:type": "ont:Computation"
+        },
+        "log:ad4220292-309c-4947-aa5d-e7a3b67c7926": {
+            "prov:startTime": "2016-06-25T21:11:15.501909",
+            "prov:endTime": "2016-06-25T21:11:19.504196",
+            "prov:type": "ont:Retrieval"
+        },
+        "log:af16dd7b8-e984-428f-a1ca-1a220e4acbeb": {
+            "prov:startTime": "2016-06-25T21:11:15.501909",
+            "prov:endTime": "2016-06-25T21:11:19.504196",
+            "prov:type": "ont:Retrieval"
+        },
+        "log:ad395f3ec-dbc0-420b-9837-7a7b616354b1": {
+            "ont:Guery": "?$select=dbaname&$limit=50000",
+            "prov:startTime": "2016-06-25T21:11:15.501909",
+            "prov:endTime": "2016-06-25T21:11:19.504196",
+            "prov:type": "ont:Retrieval"
+        },
+        "log:a937ea183-7125-4fd2-a52a-2988475c6645": {
+            "prov:startTime": "2016-06-25T21:11:15.501909",
+            "prov:endTime": "2016-06-25T21:11:19.504196",
+            "prov:type": "ont:Computation"
+        }
+    },
+    "wasAttributedTo": {
+        "_:id13": {
+            "prov:agent": "alg: get_liquor",
+            "prov:entity": "dat:closest_stop_liq"
+        }
+    },
+    "wasDerivedFrom": {
+        "_:id17": {
+            "prov:generation": "log:a4de3b7fb-8666-4357-8868-668f1ceddc8d",
+            "prov:usedEntity": "bdp:hda6-fnsh",
+            "prov:usage": "log:a4de3b7fb-8666-4357-8868-668f1ceddc8d",
+            "prov:activity": "log:a4de3b7fb-8666-4357-8868-668f1ceddc8d",
+            "prov:generatedEntity": "dat:closest_stop_liq"
+        },
+        "_:id18": {
+            "prov:generation": "log:a937ea183-7125-4fd2-a52a-2988475c6645",
+            "prov:usedEntity": "dat:closest_stop_liq",
+            "prov:usage": "log:a937ea183-7125-4fd2-a52a-2988475c6645",
+            "prov:activity": "log:a937ea183-7125-4fd2-a52a-2988475c6645",
+            "prov:generatedEntity": "dat:liquor_freq"
+        },
+        "_:id15": {
+            "prov:generation": "log:a4de3b7fb-8666-4357-8868-668f1ceddc8d",
+            "prov:usedEntity": "dat:restaurant",
+            "prov:usage": "log:a4de3b7fb-8666-4357-8868-668f1ceddc8d",
+            "prov:activity": "log:a4de3b7fb-8666-4357-8868-668f1ceddc8d",
+            "prov:generatedEntity": "dat:closest_stop_liq"
+        },
+        "_:id16": {
+            "prov:generation": "log:a4de3b7fb-8666-4357-8868-668f1ceddc8d",
+            "prov:usedEntity": "sj:stops",
+            "prov:usage": "log:a4de3b7fb-8666-4357-8868-668f1ceddc8d",
+            "prov:activity": "log:a4de3b7fb-8666-4357-8868-668f1ceddc8d",
+            "prov:generatedEntity": "dat:closest_stop_liq"
         }
     }
 }

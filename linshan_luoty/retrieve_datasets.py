@@ -1,9 +1,10 @@
 import urllib.request
 import json
 import datetime
-import pymongo
+import dml
 import sys
-import prov.model
+import prov
+import provenance
 import uuid
 
 
@@ -13,10 +14,11 @@ datasets = {
 	'approved_building_permits':'https://data.cityofboston.gov/resource/msk6-43c6.json?$limit=50000'
 }
 
-
-# Until a library is created, we just use the script directly.
-exec(open('../pymongo_dm.py').read())
-exec(open('get_repo.py').read())
+#auth
+client = dml.pymongo.MongoClient()
+repo = client.repo
+repo.authenticate('linshan_luoty','linshan_luoty')
+auth = json.loads(open(sys.argv[1]).read())
 
 # Retrieve some data sets.
 startTime = datetime.datetime.now()
@@ -28,9 +30,12 @@ for title in datasets:
 	#s = json.dumps(r, sort_keys=True, indent=2)
 	repo.dropPermanent(title)
 	repo.createPermanent(title)
-	repo[auth['admin']['name']+'.'+title].insert_many(r)
+	repo['linshan_luoty'+'.'+title].insert_many(r)
 
 endTime = datetime.datetime.now()
+
+startTime = None
+endTime = None
 
 # Create the provenance document describing everything happening
 # in this script. Each run of the script will generate a new
@@ -38,18 +43,14 @@ endTime = datetime.datetime.now()
 # can then be used on subsequent runs to determine dependencies
 # and "replay" everything. The old documents will also act as a
 # log.
-doc = prov.model.ProvDocument()
-doc.add_namespace('alg', 'https://data-mechanics.s3.amazonaws.com/linshan_luoty/algorithm/') # The scripts in <folder>/<filename> format.
-doc.add_namespace('dat', 'https://data-mechanics.s3.amazonaws.com/linshan_luoty/data/') # The data sets in <user>/<collection> format.
-doc.add_namespace('ont', 'https://data-mechanics.s3.amazonaws.com/ontology#') # 'Extension', 'DataResource', 'DataSet', 'Retrieval', 'Query', or 'Computation'.
-doc.add_namespace('log', 'https://data-mechanics.s3.amazonaws.com/log#') # The event log.
-doc.add_namespace('bdp', 'https://data.cityofboston.gov/resource/')
+'''
+doc = provenance.init()
 
 this_script = doc.agent('alg:retrieve_datasets', {prov.model.PROV_TYPE:prov.model.PROV['SoftwareAgent'], 'ont:Extension':'py'})
 
 # crime incidents
 crime_resource = doc.entity('bdp:7cdf-6fgx', {'prov:label':'311, Service Requests', prov.model.PROV_TYPE:'ont:DataResource', 'ont:Extension':'json'})
-get_crime = doc.activity('log:a'+str(uuid.uuid4()), startTime, endTime)
+get_crime = doc.activity('log:a'+str(uuid.uuid4()), startTime, endTime, {prov.model.PROV_LABEL: "Retrieve datasets."})
 doc.wasAssociatedWith(get_crime, this_script)
 doc.usage(get_crime, crime_resource, startTime, None,
         {prov.model.PROV_TYPE:'ont:Retrieval',
@@ -93,7 +94,8 @@ doc.wasGeneratedBy(building, get_building, endTime)
 doc.wasDerivedFrom(building, building_resource, get_building, get_building, get_building)
 
 repo.record(doc.serialize()) # Record the provenance document.
-#print(json.dumps(json.loads(doc.serialize()), indent=4))
-open('plan.json','a').write(json.dumps(json.loads(doc.serialize()), indent=4))
+provenance.update(doc)
+
 print(doc.get_provn())
+'''
 repo.logout()

@@ -1,13 +1,10 @@
 from geopy.geocoders import Nominatim
 import urllib.request
 import json
-import pymongo
+import dml
 import prov.model
 import datetime
 import uuid
-
-# Until a library is created, we just use the script directly.
-exec(open('../pymongo_dm.py').read())
 
 def street_abbrev(address):
 	street_suffixes = {"Road": "Rd", "Street": "St", "Avenue": "Av", "Place": "Pl"}
@@ -16,7 +13,7 @@ def street_abbrev(address):
 			return address.replace(word, street_suffixes[word])
 
 # Set up the database connection.
-client = pymongo.MongoClient()
+client = dml.pymongo.MongoClient()
 repo = client.repo
 repo.authenticate('loyuichi', 'loyuichi')
 
@@ -26,25 +23,25 @@ startTime = datetime.datetime.now()
 # Standardizing street name abbreviations
 geolocator = Nominatim()
 
-for meter in repo['loyuichi.meters'].find({'streetname': {'$exists': False}}):
-	try:
-		location = geolocator.reverse(str(meter['Y']) + ', ' + str(meter['X']))
+#for meter in repo['loyuichi.meters'].find({'streetname': {'$exists': False}}):
+	# try:
+	# 	location = geolocator.reverse(str(meter['Y']) + ', ' + str(meter['X']))
 
-		if ('road' in location.raw['address']):
-			street_address = street_abbrev(location.raw['address']['road'])
-			repo['loyuichi.meters'].update({'_id': meter['_id']}, {'$set': {'streetname': street_address}})
-	except:
-		pass
+	# 	if ('road' in location.raw['address']):
+	# 		street_address = street_abbrev(location.raw['address']['road'])
+	# 		repo['loyuichi.meters'].update({'_id': meter['_id']}, {'$set': {'streetname': street_address}})
+	# except:
+	# 	pass
 
-for fe in repo['loyuichi.food_establishments'].find({'streetname': {'$exists': False}}):
-	try:
-		location = geolocator.reverse(str(fe['location']['latitude']) + ', ' + str(fe['location']['longitude']))
+# for fe in repo['loyuichi.food_establishments'].find({'streetname': {'$exists': False}}):
+# 	try:
+# 		location = geolocator.reverse(str(fe['location']['latitude']) + ', ' + str(fe['location']['longitude']))
 
-		if ('road' in location.raw['address']):
-			street_address = street_abbrev(location.raw['address']['road'])
-			repo['loyuichi.food_establishments'].update({'_id': fe['_id']}, {'$set': {'streetname': street_address}})
-	except:
-		pass
+# 		if ('road' in location.raw['address']):
+# 			street_address = street_abbrev(location.raw['address']['road'])
+# 			repo['loyuichi.food_establishments'].update({'_id': fe['_id']}, {'$set': {'streetname': street_address}})
+# 	except:
+# 		pass
 endTime = datetime.datetime.now()
 
 # Create the provenance document describing everything happening

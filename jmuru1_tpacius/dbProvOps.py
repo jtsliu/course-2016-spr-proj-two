@@ -1,15 +1,13 @@
 import urllib.request
 import json
-import pymongo
+import dml
 import prov.model
 import datetime
 import uuid
 import apitest as apitest
 
-# Until a library is created, we just use the script directly.
-exec(open('pymongo_dm.py').read())
 # Set up the database connection.
-client = pymongo.MongoClient()
+client = dml.pymongo.MongoClient()
 repo = client.repo
 repo.authenticate('jmuru1_tpacius', 'jmuru1_tpacius')
 
@@ -18,13 +16,13 @@ startTime = datetime.datetime.now()
 
 #The collections are being created and populated here
 
-repo.dropPermanent("zipcarmembers")
-repo.createPermanent("zipcarmembers")
-repo['jmuru1_tpacius.zipcarmembers'].insert_many(apitest.zipCarMemberCount)
-
-repo.dropPermanent("zipcarreservations")
-repo.createPermanent("zipcarreservations")
-repo['jmuru1_tpacius.zipcarreservations'].insert_many(apitest.zipCarReservations)
+# repo.dropPermanent("zipcarmembers")
+# repo.createPermanent("zipcarmembers")
+# repo['jmuru1_tpacius.zipcarmembers'].insert_many(apitest.zipCarMemberCount)
+#
+# repo.dropPermanent("zipcarreservations")
+# repo.createPermanent("zipcarreservations")
+# repo['jmuru1_tpacius.zipcarreservations'].insert_many(apitest.zipCarReservations)
 
 repo.dropPermanent("propertyvalue")
 repo.createPermanent("propertyvalue")
@@ -61,8 +59,8 @@ resource2 = doc.entity('bdp:498g-jbmi', {'prov:label':'Zipcar Boston Reservation
 resource3 = doc.entity('bdp:n7za-nsjh', {'prov:label':'Boston Property Values', prov.model.PROV_TYPE:'ont:DataResource', 'ont:Extension':'json'})
 this_run = doc.activity('log:a'+str(uuid.uuid4()), startTime, endTime, {prov.model.PROV_TYPE:'ont:Retrieval', 'ont:Query':'?$limit=1000'})
 doc.wasAssociatedWith(this_run, this_script)
-doc.used(this_run, resource1, startTime)
-doc.used(this_run, resource2, startTime)
+# doc.used(this_run, resource1, startTime)
+# doc.used(this_run, resource2, startTime)
 doc.used(this_run, resource3, startTime)
 
 zipcarmembers = doc.entity('dat:zipcarmembers', {prov.model.PROV_LABEL:'Zipcar Member Count', prov.model.PROV_TYPE:'ont:DataSet'})

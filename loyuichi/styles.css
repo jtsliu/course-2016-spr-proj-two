@@ -1,0 +1,133 @@
+body {
+	text-align: center;
+	background-color: #292929;
+	font-family: "Karla", Helvetica, Arial, sans-serif;
+	color: #ffffff;
+	margin-top: 80px;
+	margin-bottom: 80px;
+}
+
+#map {
+	margin: 0 auto;
+	color: #292929;
+}
+
+.leaflet-container {
+	font-family: "Karla", Helvetica, Arial, sans-serif;
+	font-size: 1em;
+}
+
+rect.hour {
+	stroke: #292929;
+	stroke-width: 8px;
+}
+
+text.mono {
+	font-size: 9pt;
+	font-family: "Karla", courier;
+	fill: #545454;
+}
+
+text.axis-workweek {
+	fill: #aaa;
+}
+
+text.axis-worktime {
+	fill: #aaa;
+}
+
+.label {
+  position: absolute;
+  width: 80px;
+  height: 24px;
+  font-size: 0.95em;
+  padding: 3px;
+  pointer-events: none;
+  background-color: #EC6D6D;
+}
+
+#dataset-picker {
+	margin-bottom: 25px;
+}
+
+.dataset-button.tickets {
+    background-color: #EC6D6D;
+}
+
+.dataset-button.towed {
+    background-color: #ECD06D;
+}
+
+.dataset-button {
+    width: 100px;
+    height: 40px;
+    border-radius: 5px;
+    margin-left: 15px;
+    border: none;
+    font-family: "Karla";
+    font-size: 1em;
+    color: #ffffff;
+   	cursor: pointer;
+}
+
+.dataset-button:hover{
+	border: 2px solid rbga(255, 255, 255, 0.5);
+}
+
+.selected {
+	background-color: red;
+}
+
+.leaflet-label {
+	background: rgb(235, 235, 235);
+	background: rgba(235, 235, 235, 0.81);
+	background-clip: padding-box;
+	border-color: #777;
+	border-color: rgba(0,0,0,0.25);
+	border-radius: 4px;
+	border-style: solid;
+	border-width: 4px;
+	color: #111;
+	display: block;
+	font: 12px/20px "Helvetica Neue", Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	padding: 1px 6px;
+	position: absolute;
+	-webkit-user-select: none;
+	   -moz-user-select: none;
+	    -ms-user-select: none;
+	        user-select: none;
+	pointer-events: none;
+	white-space: nowrap;
+	z-index: 6;
+}
+
+.leaflet-label.leaflet-clickable {
+	cursor: pointer;
+}
+
+.leaflet-label:before,
+.leaflet-label:after {
+	border-top: 6px solid transparent;
+	border-bottom: 6px solid transparent;
+	content: none;
+	position: absolute;
+	top: 5px;
+}
+
+.leaflet-label:before {
+	border-right: 6px solid black;
+	border-right-color: inherit;
+	left: -10px;
+}
+
+.leaflet-label:after {
+	border-left: 6px solid black;
+	border-left-color: inherit;
+	right: -10px;
+}
+
+.leaflet-label-right:before,
+.leaflet-label-left:after {
+	content: "";
+}

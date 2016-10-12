@@ -1,6 +1,6 @@
 import urllib.request
 import json
-import pymongo
+import dml
 import prov.model
 import datetime
 import uuid
@@ -12,11 +12,8 @@ def reduce(f, R):
     keys = {k for (k,v) in R}
     return [f(k1, [v for (k2,v) in R if k1 == k2]) for k1 in keys]
 
-# Until a library is created, we just use the script directly.
-exec(open('../pymongo_dm.py').read())
-
 # Set up the database connection.
-client = pymongo.MongoClient()
+client = dml.pymongo.MongoClient()
 repo = client.repo
 repo.authenticate('jlam17_mckay678', 'jlam17_mckay678')
 
@@ -115,7 +112,7 @@ doc.add_namespace('ont', 'http://datamechanics.io/ontology#') # 'Extension', 'Da
 doc.add_namespace('log', 'http://datamechanics.io/log#') # The event log.
 doc.add_namespace('bdp', 'https://data.cityofboston.gov/resource/')
 
-this_script = doc.agent('alg:example', {prov.model.PROV_TYPE:prov.model.PROV['SoftwareAgent'], 'ont:Extension':'py'})
+this_script = doc.agent('alg:foodNames', {prov.model.PROV_TYPE:prov.model.PROV['SoftwareAgent'], 'ont:Extension':'py'})
 resource = doc.entity('bdp:wc8w-nujj', {'prov:label':'Active Food Establishment Licenses', prov.model.PROV_TYPE:'ont:DataResource', 'ont:Extension':'json'})
 this_run = doc.activity('log:a'+str(uuid.uuid4()), startTime, endTime, {prov.model.PROV_TYPE:'ont:Computation', 'ont:Query':'?accessType=DOWNLOAD'})
 doc.wasAssociatedWith(this_run, this_script)
@@ -149,11 +146,10 @@ doc.wasDerivedFrom(retailBakery, resource, this_run, this_run, this_run)
 repo.record(doc.serialize()) # Record the provenance document.
 provEx = open('provFoodNames.json', 'w')
 provEx.write(json.dumps(json.loads(doc.serialize()), indent=4))
-prov2 = open('planFoodNames.json', 'w')
-provEx.write(doc.get_provn())
+prov2 = open('plan.json', 'a')
+prov2.write(doc.get_provn())
 #print(json.dumps(json.loads(doc.serialize()), indent=4))
 # print(doc.get_provn())
 repo.logout()
 
 ## eof
-

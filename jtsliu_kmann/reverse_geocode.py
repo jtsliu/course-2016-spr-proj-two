@@ -5,18 +5,15 @@
 import datetime
 import json
 import prov.model
-import pymongo
+import dml
 import urllib.request
 import uuid
 from geopy.geocoders import Nominatim # use this for getting zipcodes
 
 geolocator = Nominatim()
 
-# Open the file for interfacing with DB
-exec(open('../pymongo_dm.py').read())
-
 # Set up the db connection
-client = pymongo.MongoClient()
+client = dml.pymongo.MongoClient()
 repo = client.repo
 repo.authenticate('jtsliu_kmann', 'jtsliu_kmann')
 
@@ -38,7 +35,7 @@ crime_data = getCollection('crime')
 
 count = 0
 for x in crime_data:
-	if count == 2000:
+	if count == 10:#the original count is 2000
 		break
 	lng = x['location']['coordinates'][0]
 	lat = x['location']['coordinates'][1]

@@ -1,19 +1,15 @@
 import urllib.request
 import json
-import pymongo
+import dml
 import prov.model
 import datetime
 import uuid
 
-# Until a library is created, we just use the script directly.
-exec(open('../pymongo_dm.py').read())
-
 # Set up the database connection.
-auth = open('auth.json', 'r')
-cred = json.load(auth)
-client = pymongo.MongoClient()
+teamname = 'ekwivagg_yuzhou7'
+client = dml.pymongo.MongoClient()
 repo = client.repo
-repo.authenticate(cred['username'], cred['pwd'])
+repo.authenticate(teamname, teamname)
 startTime = datetime.datetime.now()
 
 def map(f, R):
@@ -80,6 +76,7 @@ doc.wasDerivedFrom(inspection, restaurant_dat, inspection_calc, inspection_calc,
 
 repo.record(doc.serialize())
 content = json.dumps(json.loads(doc.serialize()), indent=4)
-f = open('plan.json', 'w')
+f = open('plan.json', 'a')
+f.write(",\n")
 f.write(content)
 repo.logout()

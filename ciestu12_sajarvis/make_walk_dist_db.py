@@ -15,19 +15,16 @@ API.
 """
 import urllib.request
 import json
-import pymongo
+import dml
 import prov.model
 import time
 import datetime
 import uuid
 import sys
 
-# Until a library is created, we just use the script directly.
-exec(open('../pymongo_dm.py').read())
-
 teamname = 'ciestu12_sajarvis'
 # Set up the database connection.
-client = pymongo.MongoClient()
+client = dml.pymongo.MongoClient()
 repo = client.repo
 repo.authenticate(teamname, teamname)
 
@@ -64,6 +61,9 @@ def main():
     # projection to get the values we want for stops and coordinates
     all_stops = [(s['line'], s['stop_id']) for s in stops_doc]
     all_coords = [(c['stop_id'], c['stop_lat'], c['stop_lon']) for c in coords_doc if c['stop_id']]
+    if dml.options.trial:
+        all_stops = all_stops[0:20]
+        all_coords = all_coords[0:20]
     # and aggregate all the stops on each branch into an associated list
     line_stops = aggregate(all_stops, list)
 
